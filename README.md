@@ -26,6 +26,6 @@ It writes all the images to the imgs/ directory with the format %d.jpg where %d 
 
 To compile to video, -r is the frame rate
 ```
-ffmpeg -r 10 -f image2 -s 1280x720 -i imgs/%d.jpg -vcodec libx264 -crf 15 test.mp4
+ffmpeg -r 5 -f image2 -s 1280x720 -i imgs/%d.jpg -vcodec libx264 -crf 15 test.mp4
 ```
 
