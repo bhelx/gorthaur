@@ -1,5 +1,7 @@
 Here is some code you can use to capture some webcam shots periodically then compile to a timelapse video.
 
+I hardly wrote any of it. [@tenderlove](http://tenderlovemaking.com/2014/03/26/webcam-photos-with-ruby.html) wrote it
+
 First you need the av_capture gem
 ```
 gem install av_capture
