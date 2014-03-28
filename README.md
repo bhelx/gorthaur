@@ -31,3 +31,9 @@ To compile to video, -r is the frame rate:
 ffmpeg -r 30 -f image2 -s 1280x720 -i imgs/%d.jpg -vcodec libx264 -crf 15 output.mp4
 ```
 
+To add audio track:
+
+```
+ffmpeg -i output.mp4 -i mytrack.mp3 -vcodec copy -acodec copy -acodec copy -shortest output_with_audio.mp4
+```
+
