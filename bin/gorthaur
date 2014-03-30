@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+require "dante"
+require "gorthaur"
+require "pry"
+
+case
+when ARGV.include?("listener") then
+  Dante::Runner.new("gorthaur_listener").tap do |runner|
+    runner.description = "Listen for any watchers"
+    runner.execute do
+      server = Gorthaur::Server.new
+      Thread.new { server.call }
+      DRb.start_service(Gorthaur::URI, server)
+      DRb.thread.join
+    end
+  end
+
+when ARGV.include?("watcher")
+  Dante::Runner.new("gorthaur_watcher").tap do |runner|
+    runner.description = "Watches and reports to the listener"
+
+    runner.with_options do |opts|
+      opts.on("-r", "--rate SECONDS", Integer, "Wait this long between shots") do |rate|
+        options[:rate] = rate
+      end
+
+      opts.on("-f", "--frame INDEX", Integer, "Start at this frame index") do |frame|
+        options[:frame] = frame
+      end
+
+      opts.on("-p", "--path PATH", String, "Store shots in this directory") do |directory|
+        options[:directory] = directory
+      end
+    end
+
+    runner.execute do |opts|
+      rate = opts[:rate] || ENV["GORTHAUR_RATE"] || 3
+      frame = opts[:frame] || ENV["GORTHAUR_FRAME"] || 1
+      directory = opts[:directory] || ENV["GORTHAUR_DIRECTORY"] || File.join("~", "Pictures", "gorthaur")
+
+      Gorthaur::Client.new(rate, frame, directory).call
+    end
+  end
+
+end
