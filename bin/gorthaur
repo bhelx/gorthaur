@@ -36,8 +36,7 @@ when ARGV.include?("watcher")
     runner.execute do |opts|
       rate = opts[:rate] || ENV["GORTHAUR_RATE"] || 3
       frame = opts[:frame] || ENV["GORTHAUR_FRAME"] || 1
-      directory = opts[:directory] || ENV["GORTHAUR_DIRECTORY"] || File.join("~", "Pictures", "gorthaur")
-
+      directory = opts[:directory] || ENV["GORTHAUR_DIRECTORY"] || File.join(Dir.home, "Pictures", "gorthaur")
       Gorthaur::Client.new(rate, frame, directory).call
     end
   end
