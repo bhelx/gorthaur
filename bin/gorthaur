@@ -37,7 +37,8 @@ when ARGV.include?("watcher")
       rate = opts[:rate] || ENV["GORTHAUR_RATE"] || 3
       frame = opts[:frame] || ENV["GORTHAUR_FRAME"] || 1
       directory = opts[:directory] || ENV["GORTHAUR_DIRECTORY"] || File.join(Dir.home, "Pictures", "gorthaur")
-      Gorthaur::Client.new(rate, frame, directory).call
+
+      Gorthaur::Client.new(rate, frame, FileUtils.mkdir_p(directory).first).call
     end
   end
 
