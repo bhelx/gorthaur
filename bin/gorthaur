@@ -2,7 +2,6 @@
 
 require "dante"
 require "gorthaur"
-require "pry"
 
 case
 when ARGV.include?("listener") then
