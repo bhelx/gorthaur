@@ -24,7 +24,7 @@ Using
 
 The default time between between images is 5 seconds (you can change this by setting `GORTHAUR_RATE=...` or as the first argument).
 The default start frame is 1 (you can change this by setting `GORTHAUR_FRAME=...` or as the second argument).
-It writes all the images to the `imgs/` directory with the format `%d.jpg` where `%d` is the frame (you can change this directory by setting `GORTHAUR_DIRECTORY=...` or as the third argument).
+It writes all the images to the `frames/` directory with the format `%d.jpg` where `%d` is the frame (you can change this directory by setting `GORTHAUR_DIRECTORY=...` or as the third argument).
 Example:
 
 ``` shell
