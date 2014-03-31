@@ -3,10 +3,20 @@
 require "dante"
 require "gorthaur"
 
+DEFAULT_RATE = 5
+DEFAULT_FRAME = 1
+DEFAULT_PATH = File.join(Dir.home, ".gorthaur", "frames")
+DEFAULT_PID_PATH = ->(name) { File.join(Dir.home, ".gorthaur", "#{process}.pid" }
+DEFAULT_LOG_PATH = ->(name) { File.join(Dir.home, ".gorthaur", "#{process}.log" }
+
 case
 when ARGV.include?("listener") then
   Dante::Runner.new("gorthaur_listener").tap do |runner|
     runner.description = "Listen for any watchers"
+    
+    log_path = ENV["GORTHAUR_LOG_PATH"] || DEFAULT_LOG_PATH["watcher"]
+    pid_path = ENV["GORTHAUR_PID_PATH"] || DEFAULT_PID_PATH["watcher"]
+    
     runner.execute do
       server = Gorthaur::Server.new
       Thread.new { server.call }
@@ -28,15 +38,18 @@ when ARGV.include?("watcher")
         options[:frame] = frame
       end
 
-      opts.on("-p", "--path PATH", String, "Store shots in this directory") do |directory|
-        options[:directory] = directory
+      opts.on("-p", "--path PATH", String, "Store shots in this path") do |path|
+        options[:path] = path
       end
     end
+    
+    log_path = ENV["GORTHAUR_LOG_PATH"] || DEFAULT_LOG_PATH["watcher"]
+    pid_path = ENV["GORTHAUR_PID_PATH"] || DEFAULT_PID_PATH["watcher"]
 
-    runner.execute do |opts|
-      rate = opts[:rate] || ENV["GORTHAUR_RATE"] || 3
-      frame = opts[:frame] || ENV["GORTHAUR_FRAME"] || 1
-      directory = opts[:directory] || ENV["GORTHAUR_DIRECTORY"] || File.join(Dir.home, "Pictures", "gorthaur")
+    runner.execute(:log_path => log_path, :pid_path => pid_path) do |opts|
+      rate = opts[:rate] || ENV["GORTHAUR_RATE"] || DEFAULT_RATE
+      frame = opts[:frame] || ENV["GORTHAUR_FRAME"] || DEFAULT_FRAME
+      directory = opts[:path] || ENV["GORTHAUR_PATH"] || DEFAULT_PATH
 
       Gorthaur::Client.new(rate, frame, FileUtils.mkdir_p(directory).first).call
     end
