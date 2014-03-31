@@ -24,29 +24,29 @@ Using
 
 The default time between between images is 5 seconds (you can change this by setting `GORTHAUR_RATE=...` or as the first argument).
 The default start frame is 1 (you can change this by setting `GORTHAUR_FRAME=...` or as the second argument).
-It writes all the images to the `frames/` directory with the format `%d.jpg` where `%d` is the frame (you can change this directory by setting `GORTHAUR_DIRECTORY=...` or as the third argument).
+It writes all the images to the `~/.gorthaur/frames/` directory with the format `%d.jpg` where `%d` is the frame (you can change this directory by setting `GORTHAUR_PATH=...` or as the third argument).
 Example:
 
 ``` shell
 # Settings via arguments
-$ gorthaur watcher -d --rate 4 --frame 2 --directory ~/Videos/gorthaur
+$ gorthaur watcher -d --rate 4 --frame 2 --path ~/Videos/gorthaur
 ```
 
 ``` shell
 # Settings with lazy-people arguments
-$ gorthaur watcher -d -r 4 -f 2 -D ~/Videos/gorthaur
+$ gorthaur watcher -d -r 4 -f 2 -p ~/Videos/gorthaur
 ```
 
 ``` shell
 # Settings using environment variables
-$ GORTHAUR_RATE=4 GORTHAUR_FRAME=2 GORTHAUR_DIRECTORY=~/Videos/gorthaur gorthaur watcher -d
+$ GORTHAUR_RATE=4 GORTHAUR_FRAME=2 GORTHAUR_PATH=~/Videos/gorthaur gorthaur watcher -d
 ```
 
 ``` shell
 # Settings with real environment variables
 $ export GORTHAUR_RATE=4
 $ export GORTHAUR_FRAME=2
-$ export GORTHAUR_DIRECTORY=~/Videos/gorthaur
+$ export GORTHAUR_PATH=~/Videos/gorthaur
 $ gorthaur watcher -d
 ```
 
