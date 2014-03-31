@@ -22,7 +22,7 @@ Using
   1. `gorthaur listener -d`
   2. `gorthaur watcher -d`
 
-The default time between between images is 3 seconds (you can change this by setting `GORTHAUR_RATE=...` or as the first argument).
+The default time between between images is 5 seconds (you can change this by setting `GORTHAUR_RATE=...` or as the first argument).
 The default start frame is 1 (you can change this by setting `GORTHAUR_FRAME=...` or as the second argument).
 It writes all the images to the `imgs/` directory with the format `%d.jpg` where `%d` is the frame (you can change this directory by setting `GORTHAUR_DIRECTORY=...` or as the third argument).
 Example:
@@ -67,7 +67,7 @@ We recommend you use `ffmpeg`, which can be installed via `brew install ffmpeg`.
 To compile to video just use the following:
 
 ``` shell
-$ ffmpeg -r 30 -f image2 -s 1280x720 -i LOCATION_OF_IMAGES/%d.jpg -vcodec libx264 -crf 15 output.mp4
+$ ffmpeg -r 80 -f image2 -s 1280x720 -i LOCATION_OF_IMAGES/%d.jpg -vcodec libx264 -crf 15 output.mp4
 
 # The -r stands for frame rate, adjust if you set it yourself:
 $ ffmpeg -r 40 -f image2 -s 1280x720 -i LOCATION_OF_IMAGES/%d.jpg -vcodec libx264 -crf 15 output.mp4
