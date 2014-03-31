@@ -5,7 +5,7 @@ require "gorthaur"
 
 DEFAULT_RATE = 5
 DEFAULT_FRAME = 1
-DEFAULT_PATH = File.join(Dir.home, ".gorthaur", "frames")
+DEFAULT_PATH = File.join(Dir.home, "Pictures", "gorthaur", "frames")
 DEFAULT_PID_PATH = File.join(Dir.home, ".gorthaur")
 DEFAULT_LOG_PATH = File.join(Dir.home, ".gorthaur")
 
