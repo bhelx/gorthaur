@@ -5,6 +5,11 @@ require "av_capture"
 
 module Gorthaur
   URI = "druby://localhost:8787"
+  DEFAULT_RATE = 5
+  DEFAULT_FRAME = 1
+  DEFAULT_PATH = File.join(Dir.home, "Pictures", "gorthaur", "frames")
+  DEFAULT_PID_PATH = File.join(Dir.home, ".gorthaur")
+  DEFAULT_LOG_PATH = File.join(Dir.home, ".gorthaur")
 end
 
 require_relative "gorthaur/version"
