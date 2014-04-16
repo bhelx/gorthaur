@@ -6,7 +6,7 @@ require "gorthaur/version"
 Gem::Specification.new do |spec|
   spec.name          = "gorthaur"
   spec.version       = Gorthaur::VERSION
-  spec.authors       = ["Aaron Paterson", "Benjamin Eckel"]
+  spec.authors       = ["Aaron Paterson", "Benjamin Eckel", "Kurtis Rainbolt-Greene"]
   spec.email         = []
   spec.summary       = %q{Watch yourself coding}
   spec.description   = spec.summary
