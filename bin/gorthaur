@@ -2,15 +2,14 @@
 
 require "dante"
 require "gorthaur"
-
 case
-when ARGV.include?("listener") then
-  Dante::Runner.new("gorthaur_listener").tap do |runner|
-    runner.description = "Listen for any watchers"
-    
-    log_path = File.join((ENV["GORTHAUR_LOG_PATH"] || Gorthaur::DEFAULT_LOG_PATH), "listener.log")
-    pid_path = File.join((ENV["GORTHAUR_PID_PATH"] || Gorthaur::DEFAULT_PID_PATH), "listener.pid")
-    
+when ARGV.include?("server") then
+  Dante::Runner.new("gorthaur_server").tap do |runner|
+    runner.description = "Listen for any clients"
+
+    log_path = File.join((ENV["GORTHAUR_LOG_PATH"] || Gorthaur::DEFAULT_LOG_PATH), "server.log")
+    pid_path = File.join((ENV["GORTHAUR_PID_PATH"] || Gorthaur::DEFAULT_PID_PATH), "server.pid")
+
     runner.execute(:log_path => log_path, :pid_path => pid_path) do
       server = Gorthaur::Server.new
       Thread.new { server.call }
@@ -19,9 +18,9 @@ when ARGV.include?("listener") then
     end
   end
 
-when ARGV.include?("watcher")
-  Dante::Runner.new("gorthaur_watcher").tap do |runner|
-    runner.description = "Watches and reports to the listener"
+when ARGV.include?("client")
+  Dante::Runner.new("gorthaur_client").tap do |runner|
+    runner.description = "Uses the camera and reports to the server"
 
     runner.with_options do |opts|
       opts.on("-r", "--rate SECONDS", Integer, "Wait this long between shots") do |rate|
@@ -36,9 +35,9 @@ when ARGV.include?("watcher")
         options[:path] = path
       end
     end
-    
-    log_path = File.join((ENV["GORTHAUR_LOG_PATH"] || Gorthaur::DEFAULT_LOG_PATH), "watcher.log")
-    pid_path = File.join((ENV["GORTHAUR_PID_PATH"] || Gorthaur::DEFAULT_PID_PATH), "watcher.pid")
+
+    log_path = File.join((ENV["GORTHAUR_LOG_PATH"] || Gorthaur::DEFAULT_LOG_PATH), "client.log")
+    pid_path = File.join((ENV["GORTHAUR_PID_PATH"] || Gorthaur::DEFAULT_PID_PATH), "client.pid")
 
     runner.execute(:log_path => log_path, :pid_path => pid_path) do |opts|
       rate = opts[:rate] || ENV["GORTHAUR_RATE"] || Gorthaur::DEFAULT_RATE
@@ -48,5 +47,6 @@ when ARGV.include?("watcher")
       Gorthaur::Client.new(rate, frame, FileUtils.mkdir_p(directory).first).call
     end
   end
-  
+else
+  abort "You need to use gorthaur server or gorthaur client"
 end

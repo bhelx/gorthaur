@@ -19,8 +19,8 @@ Installing
 Using
 -----
 
-  1. `gorthaur listener -d`
-  2. `gorthaur watcher -d`
+  1. `gorthaur server -d`
+  2. `gorthaur client -d`
 
 The default time between between images is 5 seconds (you can change this by setting `GORTHAUR_RATE=...` or as the first argument).
 The default start frame is 1 (you can change this by setting `GORTHAUR_FRAME=...` or as the second argument).
@@ -29,17 +29,17 @@ Example:
 
 ``` shell
 # Settings via arguments
-$ gorthaur watcher -d --rate 4 --frame 2 --path ~/Videos/gorthaur
+$ gorthaur server -d --rate 4 --frame 2 --path ~/Videos/gorthaur
 ```
 
 ``` shell
 # Settings with lazy-people arguments
-$ gorthaur watcher -d -r 4 -f 2 -p ~/Videos/gorthaur
+$ gorthaur client -d -r 4 -f 2 -p ~/Videos/gorthaur
 ```
 
 ``` shell
 # Settings using environment variables
-$ GORTHAUR_RATE=4 GORTHAUR_FRAME=2 GORTHAUR_PATH=~/Videos/gorthaur gorthaur watcher -d
+$ GORTHAUR_RATE=4 GORTHAUR_FRAME=2 GORTHAUR_PATH=~/Videos/gorthaur gorthaur client -d
 ```
 
 ``` shell
@@ -47,13 +47,13 @@ $ GORTHAUR_RATE=4 GORTHAUR_FRAME=2 GORTHAUR_PATH=~/Videos/gorthaur gorthaur watc
 $ export GORTHAUR_RATE=4
 $ export GORTHAUR_FRAME=2
 $ export GORTHAUR_PATH=~/Videos/gorthaur
-$ gorthaur watcher -d
+$ gorthaur client -d
 ```
 
 For the advanced users you can also determine the `pid` file and log file:
 
 ``` shell
-$ gorthaur listener -d -P tmp/gorthaur.pid -l tmp/gorthaur.log
+$ gorthaur server -d -P tmp/gorthaur.pid -l tmp/gorthaur.log
 ```
 
 If you want to run these without going to the background just avoid using the `-d` flag.
