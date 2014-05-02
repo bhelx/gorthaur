@@ -27,10 +27,6 @@ when ARGV.include?("client")
         options[:rate] = rate
       end
 
-      opts.on("-f", "--frame INDEX", Integer, "Start at this frame index") do |frame|
-        options[:frame] = frame
-      end
-
       opts.on("-p", "--path PATH", String, "Store shots in this path") do |path|
         options[:path] = path
       end
@@ -41,10 +37,9 @@ when ARGV.include?("client")
 
     runner.execute(:log_path => log_path, :pid_path => pid_path) do |opts|
       rate = opts[:rate] || ENV["GORTHAUR_RATE"] || Gorthaur::DEFAULT_RATE
-      frame = opts[:frame] || ENV["GORTHAUR_FRAME"] || Gorthaur::DEFAULT_FRAME
       directory = opts[:path] || ENV["GORTHAUR_PATH"] || Gorthaur::DEFAULT_PATH
 
-      Gorthaur::Client.new(rate, frame, FileUtils.mkdir_p(directory).first).call
+      Gorthaur::Client.new(rate, FileUtils.mkdir_p(directory).first).call
     end
   end
 else

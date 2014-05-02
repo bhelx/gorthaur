@@ -23,29 +23,27 @@ Using
   2. `gorthaur client -d`
 
 The default time between between images is 5 seconds (you can change this by setting `GORTHAUR_RATE=...` or as the first argument).
-The default start frame is 1 (you can change this by setting `GORTHAUR_FRAME=...` or as the second argument).
-It writes all the images to the `~/.gorthaur/frames/` directory with the format `%d.jpg` where `%d` is the frame (you can change this directory by setting `GORTHAUR_PATH=...` or as the third argument).
+It writes all the images to the `~/Pictures/frames/` directory with the format `%d.jpg` where `%d` is the timestamp (you can change this directory as documented below).
 Example:
 
 ``` shell
 # Settings via arguments
-$ gorthaur server -d --rate 4 --frame 2 --path ~/Videos/gorthaur
+$ gorthaur server -d --rate 4 --path ~/Videos/gorthaur
 ```
 
 ``` shell
 # Settings with lazy-people arguments
-$ gorthaur client -d -r 4 -f 2 -p ~/Videos/gorthaur
+$ gorthaur client -d -r 4 -p ~/Videos/gorthaur
 ```
 
 ``` shell
 # Settings using environment variables
-$ GORTHAUR_RATE=4 GORTHAUR_FRAME=2 GORTHAUR_PATH=~/Videos/gorthaur gorthaur client -d
+$ GORTHAUR_RATE=4 GORTHAUR_PATH=~/Videos/gorthaur gorthaur client -d
 ```
 
 ``` shell
 # Settings with real environment variables
 $ export GORTHAUR_RATE=4
-$ export GORTHAUR_FRAME=2
 $ export GORTHAUR_PATH=~/Videos/gorthaur
 $ gorthaur client -d
 ```
@@ -69,7 +67,7 @@ To compile to video just use the following:
 ``` shell
 $ ffmpeg -r 80 -f image2 -s 1280x720 -i LOCATION_OF_IMAGES/%d.jpg -vcodec libx264 -crf 15 output.mp4
 
-# The -r stands for frame rate, adjust if you set it yourself:
+# The -r stands for rate, adjust if you're not using the default:
 $ ffmpeg -r 40 -f image2 -s 1280x720 -i LOCATION_OF_IMAGES/%d.jpg -vcodec libx264 -crf 15 output.mp4
 ```
 
