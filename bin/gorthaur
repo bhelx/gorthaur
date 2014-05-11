@@ -43,5 +43,5 @@ when ARGV.include?("client")
     end
   end
 else
-  abort "You need to use gorthaur server or gorthaur client"
+  `gorthaur server -d && gorthaur client -d`
 end
