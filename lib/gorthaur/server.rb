@@ -25,7 +25,11 @@ module Gorthaur
     private
 
     def recorders
-      AVCapture.devices.find(&:video?)
+      devices = AVCapture.devices.find(&:video?)
+      if devices.nil? || devices.empty?
+        raise "Could not find audio capture device"
+      end
+      @devices ||= devices
     end
   end
 end
