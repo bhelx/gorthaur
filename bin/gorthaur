@@ -3,6 +3,8 @@
 require "dante"
 require "gorthaur"
 case
+when ARGV.include?("version") || ARGV.include?("--version") then
+  puts Gorthaur::VERSION
 when ARGV.include?("server") then
   Dante::Runner.new("gorthaur_server").tap do |runner|
     runner.description = "Listen for any clients"
