@@ -2,7 +2,8 @@ module Gorthaur
   class Client
     def initialize(rate, directory)
       @rate = rate
-      @directory = directory
+      # add a prefix a datetime stamp to the directory so we have uniuqe 'client sessions'
+      @directory = FileUtils.mkdir_p(File.join(directory, Time.now.strftime("%Y-%m-%d-%H:%M:%S")))
       @server = DRbObject.new_with_uri(Gorthaur::URI)
     end
 
