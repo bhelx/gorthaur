@@ -23,7 +23,7 @@ Using
   2. `gorthaur client -d`
 
 The default time between between images is 5 seconds (you can change this by setting `GORTHAUR_RATE=...` or as the first argument).
-It writes all the images to the `~/Pictures/gorthaur/frames` directory with the format `%d.jpg` where `%d` is the timestamp (you can change this directory as documented below).
+It writes all the images to the `~/Pictures/gorthaur/frames/{session}` directory with the format `%d.jpg` where `%d` is the timestamp of the image and {session} is the timestamp of when you started the session (you can change this directory as documented below).
 Example:
 
 ``` shell
